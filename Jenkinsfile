@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker run'  
                 sh 'mvn clean package'
                   }
     	    }
