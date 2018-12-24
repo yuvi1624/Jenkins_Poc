@@ -1,5 +1,8 @@
 pipeline {
 
+ agent none
+    stages {
+
     stage('Initialize')
     {
         def dockerHome = tool 'Docker'
@@ -16,6 +19,7 @@ pipeline {
            {
             sh 'uname -a'
             sh 'mvn -B -DskipTests clean package'  
-          }
+	}
+     }
 }      
     
