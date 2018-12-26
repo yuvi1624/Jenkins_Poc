@@ -1,25 +1,16 @@
 pipeline {
-agent none        
+agent any        
     stages{
-
-	//stage('Initialize')
-	//		    {
-        //def dockerHome = tool 'Docker'
-        //def mavenHome  = tool 'Maven'
-        //env.PATH = "${dockerHome}:${mavenHome}/bin:${env.PATH}"
-        //}
-
-        stage('Build') {
-	agent {
-        //  docker {
-//	    label 'docker'
-          //  image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-	//	}
-	    }
+        stage('Source code Pull') {
+            steps{
+                    git url: 'https://github.com/yuvi1624/Jenkins_Poc'
+               }
+            }
+          
+         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package'
                   }
-    	    }
-       }
+              }
+        }
     }  
