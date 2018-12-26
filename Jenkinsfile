@@ -1,5 +1,9 @@
 pipeline {
 agent any        
+    tools {
+	jdk "Java-1.8"
+	Maven "Maven-3.5.4"
+    }
     stages{
         stage('Source code Pull') {
             steps{
