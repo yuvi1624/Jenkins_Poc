@@ -21,7 +21,15 @@ agent any
 			  }
 		  }
 	  }
-          
+	    
+	  stage('SonarQube Integration')  {
+	     steps {
+		     withSonarQubeEnv('Sonar-3.5.0.1254') {
+                sh 'mvn clean package'
+              }
+	     }
+	  }
+		  
          stage('Build') { 
             steps {
                 sh 'mvn clean install -U'
