@@ -10,6 +10,17 @@ agent any
                     git url: 'https://github.com/yuvi1624/Jenkins_Poc'
                }
             }
+	    
+	  stage('JUnit Test') {
+	    steps {
+		    sh 'mvn test'
+	          }
+		  post {
+			  always {
+				  junit 'target/reports/*.xml'
+			  }
+		  }
+	  }
           
          stage('Build') { 
             steps {
