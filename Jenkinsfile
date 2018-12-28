@@ -37,8 +37,11 @@ agent any
 	 stage('Uploading to Artifactory') {
 		 steps {
 			 script {
+				 mavenBuild.tool 'Maven'
 				 mavenBuild.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
 				 mavenBuild.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
+				 mavenBuild.buildinfo = newBuildInfo()
+				 
 			 }
 		 }
 	 }
@@ -46,7 +49,7 @@ agent any
          stage('Build') { 
             steps {
 		    script {
-			    mavenBuild.run pom: 'pom.xml', goals: 'clean install -U'
+			    mavenBuild.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildInfo
 		    }
 	    }
 	 }
