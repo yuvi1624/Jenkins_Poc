@@ -45,10 +45,10 @@ agent any
 			
          stage('Build') { 
             steps {
-                sh 'mvn clean install -U'
-                  }
-              }
-        }
-
-   } 
-
+		    scripts {
+			    mavenBuild run goals: 'clean install -U'
+		    }
+	    }
+	 }
+    }
+}
