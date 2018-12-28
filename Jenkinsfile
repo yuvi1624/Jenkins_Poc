@@ -1,5 +1,5 @@
 def server = Artifactory.server 'Artifactory -  4.15.0'
-def mavenBuild = Artifactory.newMavenBuild()
+def mavenBld = Artifactory.newMavenBuild()
 def buildInfo
 
 pipeline {
@@ -37,11 +37,10 @@ agent any
 	 stage('Uploading to Artifactory') {
 		 steps {
 			 script {
-				 mavenBuild.tool 'Maven'
-				 mavenBuild.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-				 mavenBuild.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
-				 mavenBuild.buildinfo = newBuildInfo()
-				 
+				 mavenBld.tool = 'Maven'
+				 mavenBld.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
+				 mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
+				 buildinfo = Artifactory.newBuildInfo()
 			 }
 		 }
 	 }
@@ -49,7 +48,7 @@ agent any
          stage('Build') { 
             steps {
 		    script {
-			    mavenBuild.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildInfo
+			    mavenBld.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildInfo
 		    }
 	    }
 	 }
