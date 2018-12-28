@@ -46,7 +46,7 @@ agent any
          stage('Build') { 
             steps {
 		    scripts {
-			    mavenBuild run goals: 'clean install -U'
+			    mavenBuild.run goals: 'clean install -U'
 		    }
 	    }
 	 }
