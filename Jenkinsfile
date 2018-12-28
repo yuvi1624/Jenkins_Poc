@@ -1,4 +1,4 @@
-def server = Artifactory.server 'Artifactory -  4.15.0'
+def server = Artifactory.server 'Artifactory - 4.15.0'
 def mavenBld = Artifactory.newMavenBuild()
 def buildInfo
 
