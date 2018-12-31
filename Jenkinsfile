@@ -38,7 +38,7 @@ agent any
 		 steps {
 			 script {
 				 mavenBld.tool = 'Maven'
-				 mavenBld.resolver null
+				 mavenBld.resolver = null
 				 mavenBld.deployer releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
 				// mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
 				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install -s settings.xml -Dmaven.repo.local=.repository -Dmaven.test.failure.ignore=true -B -U -Prelease'
