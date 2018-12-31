@@ -1,4 +1,4 @@
-def server = Artifactory.server 'Artifactory - 4.15.0'
+def server = Artifactory.server('Artifactory - 4.15.0')
 def mavenBld = Artifactory.newMavenBuild()
 def buildInfo
 
@@ -34,13 +34,14 @@ agent any
 	   //  }
 	 // }
 	    
-	 stage('Uploading to Artifactory') {
+	 stage('Artifactory Build') {
 		 steps {
 			 script {
 				 mavenBld.tool = 'Maven'
+				 mavenBld.resolver null
 				 mavenBld.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-				 mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
-				 buildinfo = Artifactory.newBuildInfo()
+				// mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
+				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install -s settings.xml -Dmaven.repo.local=.repository -Dmaven.test.failure.ignore=true -B -U -Prelease'
 			 }
 		 }
 	 }
@@ -48,7 +49,7 @@ agent any
          stage('Build') { 
             steps {
 		    script {
-			    mavenBld.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildInfo
+			    sh 'mvn clean install -U'
 		    }
 	    }
 	 }
