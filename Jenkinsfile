@@ -22,15 +22,15 @@ agent any
 		  }
 	  }
 	    
-	  //stage('SonarQube Integration')  {
-	  //   steps {
-	//	     withSonarQubeEnv('Sonar') {
-          //      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar'
-           //   }
-	   //  }
-	 // }
+	  stage('SonarQube Integration')  {
+	     steps {
+		     withSonarQubeEnv('Sonar') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar'
+              }
+	    }
+	  }
 	    
-	 stage('Artifactory Build') {
+	/* stage('Artifactory Build') {
 		 steps {
 			 script {
 				 def server = Artifactory.server('Artifactory - 4.15.0')
@@ -46,7 +46,7 @@ agent any
 				 server.publishBuildInfo buildinfo
 			 }
 		 }
-	 }
+	 }*/
 			
          stage('Build') { 
             steps {
