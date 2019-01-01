@@ -40,7 +40,7 @@ agent any
 				 mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
 				// mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
-				 def buildinfo = Artifactory.newMavenBuild()
+				 def buildinfo = Artifactory.newBuildInfo()
 				 buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
 				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildinfo
 				 server.publishBuildInfo buildinfo
