@@ -1,4 +1,6 @@
-package com.firstMaven.demo;
+package com.firstmaven.demo;
+
+import java.util.logging.Logger;
 
 /**
  * Hello world!
@@ -6,15 +8,15 @@ package com.firstMaven.demo;
  */
 public class App 
 {
-	private static final String message = "Hello World!";
+	private static final String MESSAGE = "Hello World!";
 	App() {}
 	
     public static void main(String[] args) {
     	
-        System.out.println(new App().getMessage());
+        Logger.getLogger(new App().getMessage());
     }
 
     private final String getMessage() {
-        return message;
+        return MESSAGE;
     }
 }
