@@ -42,7 +42,8 @@ agent any
 				// mavenBld.resolver releaseRepo: 'Jenkins_Poc_releases', snapshotRepo: 'Jenkins_Poc_snapshots', server: server
 				 def buildinfo = Artifactory.newMavenBuild()
 				 buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
-				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install -U'
+				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install -U', buildInfo: buildinfo
+				 server.publishBuildInfo buildinfo
 			 }
 		 }
 	 }
