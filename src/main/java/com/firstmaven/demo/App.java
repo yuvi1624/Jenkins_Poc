@@ -13,7 +13,7 @@ public class App
 	
     public static void main(String[] args) {
     	
-        Logger.getLogger(new App().getMessage());
+        System.out.println(new App().getMessage());
     }
 
     private final String getMessage() {
