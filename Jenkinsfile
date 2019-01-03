@@ -11,7 +11,7 @@ agent any
                }
             }
 	    
-	  stage('JUnit Test') {
+	  /*stage('JUnit Test') {
 	    steps {
 		    sh 'mvn test'
 	          }
@@ -28,7 +28,7 @@ agent any
                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.5.0.1254:sonar'
               }
 	    }
-	  }
+	  }*/
 	    
 	  stage('Build') { 
             steps {
@@ -49,8 +49,8 @@ agent any
 				 //mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
 				 def buildinfo = Artifactory.newBuildInfo()
+				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
 				 buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
-				 //buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
 				 server.publishBuildInfo buildinfo
 			 }
 		 }
