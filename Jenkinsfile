@@ -49,7 +49,8 @@ agent any
 				 //mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
 				 def buildinfo = Artifactory.newBuildInfo()
-				 buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
+				 buildInfo.env.capture = true
+				 //buildinfo = mavenBld.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
 				 buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
 				 server.publishBuildInfo buildinfo
 			 }
