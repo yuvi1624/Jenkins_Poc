@@ -50,11 +50,11 @@ agent any
 				 mavenBld.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
 				 //mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
-				 rtMaven.deployer.deployArtifacts = false
+				 mavenBld.deployer.deployArtifacts = false
 				 def buildinfo = mavenBld.run pom: 'Jenkins_Poc/pom.xml', goals: 'clean install', buildInfo: buildinfo
 				 //buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
 				 //buildInfo.env.capture = true
-				 rtMaven.deployer.deployArtifacts buildInfo
+				 mavenBld.deployer.deployArtifacts buildInfo
 				 server.publishBuildInfo buildinfo
 			 }
 		 }
