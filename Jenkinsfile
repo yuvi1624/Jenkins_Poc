@@ -51,7 +51,7 @@ agent any
 				 //mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
 				 mavenBld.deployer.deployArtifacts = false
-				 def buildinfo = mavenBld.run pom: 'Jenkins_Poc/pom.xml', goals: 'clean install', buildInfo: buildinfo
+				 def buildinfo = mavenBld.run pom: 'Jenkins_Poc/pom.xml', goals: 'clean install'
 				 //buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
 				 //buildInfo.env.capture = true
 				 mavenBld.deployer.deployArtifacts buildInfo
