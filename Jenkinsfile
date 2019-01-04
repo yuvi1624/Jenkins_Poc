@@ -1,6 +1,6 @@
 def server = Artifactory.server 'Artifactory - 4.15.0'
 def mavenBld = Artifactory.newMavenBuild()
-def buildinfo = Artifactory.newBuildInfo()
+//def buildinfo = Artifactory.newBuildInfo()
 
 pipeline {
 agent any        
@@ -34,13 +34,13 @@ agent any
 	    }
 	  }*/
 	    
-	  stage('Build') { 
+	  /*stage('Build') { 
             steps {
 		    script {
 			    sh 'mvn clean install -U'
 		    }
 	    }
-	 }
+	 }*/
 	    
 	 stage('Upload to Artifactory') {
 		 steps {
@@ -50,9 +50,11 @@ agent any
 				 mavenBld.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
 				 //mavenBld.deployer.artifactDeploymentPatterns.addExclude("pom.xml")
 				 mavenBld.tool = 'Maven'
-				 buildinfo = mavenBld.run pom: 'Jenkins_Poc/pom.xml', goals: 'clean install', buildInfo: buildinfo
-				 buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
+				 rtMaven.deployer.deployArtifacts = false
+				 def buildinfo = mavenBld.run pom: 'Jenkins_Poc/pom.xml', goals: 'clean install', buildInfo: buildinfo
+				 //buildinfo.retention maxBuilds: 3, maxDays: 7, deleteBuildArtifacts: true
 				 //buildInfo.env.capture = true
+				 rtMaven.deployer.deployArtifacts buildInfo
 				 server.publishBuildInfo buildinfo
 			 }
 		 }
